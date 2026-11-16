@@ -1,11 +1,8 @@
 /**
- * pages/api/setup-admin.js — One-Time Root Admin Setup Endpoint
- * ----------------------------------------------------------------
- * Automatically bootstraps the root Master Admin account into MongoDB Atlas.
- * Safe: If a masterAdmin already exists, it refuses to overwrite.
- *
- * Usage:
- *   Visit /api/setup-admin in your browser.
+ * pages/api/setup-admin.js — Master Admin Setup & Password Reset Endpoint
+ * ------------------------------------------------------------------------
+ * Guarantees that admin@hostel.com exists with the exact bcrypt hash
+ * for password "Admin@1234", role: "masterAdmin", and unlocked status.
  */
 
 import bcrypt from 'bcryptjs'
@@ -16,22 +13,10 @@ export default async function handler(req, res) {
   try {
     await connect()
 
-    // 1. Check if a masterAdmin already exists in the database
-    const existingAdmin = await User.findOne({ role: 'masterAdmin' })
-    if (existingAdmin) {
-      return res.status(200).json({
-        status: 'already_exists',
-        message: 'Master Admin account is already created!',
-        email: existingAdmin.email,
-        role: existingAdmin.role,
-        note: 'You can log in directly at /Login'
-      })
-    }
-
-    // 2. Hash the root password using bcrypt
+    // 1. Hash the password "Admin@1234" with 12 salt rounds
     const hashedPassword = await bcrypt.hash('Admin@1234', 12)
 
-    // 3. Create or update admin@hostel.com with role: masterAdmin
+    // 2. Upsert admin@hostel.com with the fresh bcrypt password
     const admin = await User.findOneAndUpdate(
       { email: 'admin@hostel.com' },
       {
@@ -43,25 +28,25 @@ export default async function handler(req, res) {
         loginAttempts: 0,
         lockUntil: null,
       },
-      { upsert: true, new: true }
+      { upsert: true, new: true, setDefaultsOnInsert: true }
     )
 
-    return res.status(201).json({
-      status: 'created',
-      message: '✅ Master Admin created successfully in MongoDB Atlas!',
+    return res.status(200).json({
+      status: 'success',
+      message: '✅ Master Admin password has been set to Admin@1234!',
       credentials: {
-        email: admin.email,
+        email: 'admin@hostel.com',
         password: 'Admin@1234',
         role: admin.role,
       },
-      nextStep: 'Go to /Login and sign in with these credentials.'
+      action: 'Refresh your Login tab and sign in now.'
     })
 
   } catch (error) {
     console.error('Setup admin error:', error)
     return res.status(500).json({
       status: 'error',
-      message: 'Database connection error: ' + error.message
+      message: 'Database error: ' + error.message
     })
   }
 }
