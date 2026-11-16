@@ -52,8 +52,11 @@ const Hero = () => {
 
     // If NextAuth returns an error, show it on the card
     if (res?.error) {
-      // res.error contains the message thrown in authorize()
-      setMessage(res.error)
+      if (res.error === 'CredentialsSignin' || res.error === 'undefined') {
+        setMessage('Invalid email or password. Please verify your credentials.')
+      } else {
+        setMessage(res.error)
+      }
       return
     }
 
@@ -177,11 +180,6 @@ const Hero = () => {
           Home Page
         </Button>
       </Link>
-
-      {/* ---- ERROR MESSAGE ---------------------------------- */}
-      {/* Shown in red if login fails (currently unused — errors
-          redirect to /error page instead) */}
-      <p style={{ color: 'red' }}>{message}</p>
 
       {/* ---- GUEST LOGIN ------------------------------------ */}
       {/* Guest.js renders an option to log in as a demo/guest user */}
