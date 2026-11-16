@@ -120,12 +120,26 @@ const Hero = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {/* Forgot password link */}
+        <div style={{ width: '100%', textAlign: 'right', marginTop: '2px', marginBottom: '8px' }}>
+          <Link href="/ForgotPassword">
+            <span style={{
+              fontSize: '0.8rem',
+              color: isDark ? '#64b5f6' : '#b05e1a',
+              textDecoration: 'underline',
+              cursor: 'pointer'
+            }}>
+              Forgot password?
+            </span>
+          </Link>
+        </div>
+
         {/* Login button — triggers handleSubmit */}
         <Button
           variant="outlined"
           color="success"
           onClick={handleSubmit}
-          style={{ marginTop: '20px' }}
+          style={{ marginTop: '10px' }}
         >
           login
         </Button>
