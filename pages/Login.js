@@ -49,7 +49,7 @@ const Login = () => {
           <Navbar />
           <Hero />
           {/* <Guest /> */}
-          <Footer />
+          {/* <Footer /> */}
       </div>
     // </UserContext.Provider>
   )

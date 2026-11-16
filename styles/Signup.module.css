@@ -1,0 +1,193 @@
+/* =========================================================
+   styles/Signup.module.css
+   ========================================================= */
+
+.page { min-height: 100vh; transition: color 0.4s ease; }
+.dark { color: #e8f1f8; }
+
+.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 60px);
+    padding: 32px 16px;
+}
+
+.card {
+    background: rgba(255,255,255,0.85);
+    border-radius: 20px;
+    padding: 40px 44px;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 40px rgba(180,130,70,0.14);
+    backdrop-filter: blur(8px);
+    transition: background 0.4s ease;
+}
+
+.dark .card {
+    background: rgba(13,27,42,0.9);
+    box-shadow: 0 8px 40px rgba(0,60,120,0.3);
+    border: 1px solid rgba(74,158,214,0.15);
+}
+
+.title {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #2d1a00;
+    margin: 0 0 4px;
+}
+.dark .title { color: #ffffff; }
+
+.subtitle {
+    color: #9a7a5a;
+    margin: 0 0 24px;
+    font-size: 0.9rem;
+}
+.dark .subtitle { color: #6a9abf; }
+
+/* ---- ROLE SELECTOR ----------------------------------- */
+.roleSelector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.roleBtn {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #d4956a;
+    border-radius: 10px;
+    background: transparent;
+    color: #b05e1a;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.roleBtn:hover { background: rgba(176,94,26,0.08); }
+
+.roleBtnActive {
+    background: #b05e1a;
+    color: #fff;
+    border-color: #b05e1a;
+}
+
+.dark .roleBtn { border-color: #2c5f8a; color: #4a9ed6; }
+.dark .roleBtn:hover { background: rgba(74,158,214,0.1); }
+.dark .roleBtnActive { background: #1a4a7a; color: #cfe2f3; border-color: #1a4a7a; }
+
+/* ---- FORM -------------------------------------------- */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form input {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid #d4956a;
+    background: #fffaf4;
+    color: #3d1f00;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.form input:focus {
+    border-color: #b05e1a;
+    box-shadow: 0 0 0 3px rgba(176,94,26,0.15);
+}
+
+.dark .form input {
+    background: #142233;
+    border-color: #2c5f8a;
+    color: #cfe2f3;
+}
+
+.dark .form input::placeholder { color: #6a9abf; }
+
+.dark .form input:focus {
+    border-color: #4a9ed6;
+    box-shadow: 0 0 0 3px rgba(74,158,214,0.2);
+}
+
+/* ---- HIGHLIGHTED PARENT FIELD ------------------------ */
+.highlightField {
+    background: rgba(21, 101, 192, 0.06);
+    border: 1.5px dashed #1565c0;
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.dark .highlightField {
+    background: rgba(21,101,192,0.1);
+    border-color: #2979ff;
+}
+
+.fieldLabel {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: #1565c0;
+}
+
+.dark .fieldLabel { color: #64b5f6; }
+
+.fieldHint {
+    font-size: 0.75rem;
+    color: #666;
+    margin: 0;
+}
+
+.dark .fieldHint { color: #5a7a9a; }
+
+/* ---- SUBMIT BUTTON ----------------------------------- */
+.submitBtn {
+    padding: 13px;
+    border-radius: 10px;
+    border: none;
+    background: #b05e1a;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.submitBtn:hover { background: #8a4810; }
+.submitBtn:active { transform: scale(0.98); }
+.submitBtn:disabled { background: #ccc; cursor: not-allowed; }
+
+.dark .submitBtn { background: #1a4a7a; }
+.dark .submitBtn:hover { background: #0d2f56; }
+
+/* ---- LOGIN LINK -------------------------------------- */
+.loginLink {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.88rem;
+    color: #9a7a5a;
+}
+
+.dark .loginLink { color: #5a7a9a; }
+
+.link {
+    color: #b05e1a;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.dark .link { color: #4a9ed6; }
+
+/* ---- RESPONSIVE -------------------------------------- */
+@media (max-width: 520px) {
+    .card { padding: 28px 20px; }
+}

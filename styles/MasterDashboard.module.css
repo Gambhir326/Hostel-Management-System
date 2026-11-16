@@ -1,0 +1,121 @@
+/* styles/MasterDashboard.module.css */
+.page { min-height: 100vh; transition: color 0.4s ease; }
+.dark { color: #e8f1f8; }
+
+.main { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+.loader {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; min-height: 80vh; gap: 14px; color: #888;
+}
+
+.spin {
+    display: block; width: 40px; height: 40px;
+    border: 4px solid #ddd; border-top-color: #880e4f;
+    border-radius: 50%; animation: spin 0.8s linear infinite;
+}
+.dark .spin { border-color: #2c3e50; border-top-color: #f48fb1; }
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.header { margin-bottom: 28px; }
+.title { font-size: 2rem; font-weight: 800; margin: 0 0 4px; color: #2d1a00; }
+.dark .title { color: #fff; }
+.subtitle { color: #9a7a5a; margin: 0; }
+.dark .subtitle { color: #6a9abf; }
+
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 32px;
+}
+
+.statCard {
+    background: rgba(255,255,255,0.7);
+    border-radius: 16px; padding: 24px 20px;
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+    transition: background 0.4s ease;
+}
+.dark .statCard {
+    background: rgba(13,27,42,0.8);
+    border: 1px solid rgba(244,143,177,0.15);
+}
+
+.statIcon { font-size: 1.8rem; }
+.statNum { font-size: 2.2rem; font-weight: 800; color: #2d1a00; }
+.dark .statNum { color: #fff; }
+.statLabel { font-size: 0.78rem; font-weight: 600; text-transform: uppercase; color: #880e4f; }
+.dark .statLabel { color: #f48fb1; }
+
+.tabs { display: flex; gap: 8px; margin-bottom: 24px; flex-wrap: wrap; }
+.tab {
+    padding: 10px 20px; border-radius: 10px; border: none;
+    background: rgba(0,0,0,0.06); color: #555; font-weight: 600;
+    cursor: pointer; font-size: 0.88rem; transition: all 0.2s ease;
+}
+.tab:hover { background: rgba(136,14,79,0.1); color: #880e4f; }
+.activeTab { background: #880e4f !important; color: #fff !important; }
+.dark .tab { background: rgba(255,255,255,0.07); color: #aaa; }
+.dark .tab:hover { background: rgba(244,143,177,0.15); color: #f48fb1; }
+
+.section { animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+
+.sectionHeader { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+.sectionTitle { font-size: 1.1rem; font-weight: 700; margin: 0; color: #2d1a00; }
+.dark .sectionTitle { color: #fff; }
+
+.primaryBtn {
+    padding: 9px 20px; border-radius: 9px; border: none;
+    background: #880e4f; color: #fff; font-weight: 700;
+    cursor: pointer; transition: background 0.2s;
+}
+.primaryBtn:hover { background: #5c0634; }
+
+.dangerBtn {
+    padding: 6px 14px; border-radius: 7px; border: 1.5px solid #d32f2f;
+    color: #d32f2f; background: transparent; font-size: 0.8rem; cursor: pointer;
+}
+.dangerBtn:hover { background: #d32f2f; color: #fff; }
+
+.table { border-radius: 12px; overflow: hidden; border: 1px solid rgba(0,0,0,0.08); }
+.dark .table { border-color: rgba(255,255,255,0.08); }
+
+.tableHeader {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 12px 16px; background: #880e4f; color: #fff;
+    font-size: 0.8rem; font-weight: 700; text-transform: uppercase;
+}
+
+.tableRow {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    padding: 14px 16px; border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 0.9rem; color: #2d1a00; transition: background 0.2s;
+}
+.tableRow:last-child { border-bottom: none; }
+.tableRow:hover { background: rgba(136,14,79,0.04); }
+.dark .tableRow { color: #cfe2f3; border-bottom-color: rgba(255,255,255,0.05); }
+.dark .tableRow:hover { background: rgba(244,143,177,0.05); }
+
+.empty {
+    text-align: center; padding: 48px 20px;
+    color: #9a7a5a; font-size: 1rem;
+}
+.dark .empty { color: #5a7a9a; }
+
+.muted { color: #9a7a5a; font-size: 0.88rem; }
+.dark .muted { color: #5a8aaa; }
+
+.comingSoon {
+    text-align: center; padding: 60px; font-size: 1.5rem;
+    color: #ccc; border: 2px dashed #ddd; border-radius: 16px; margin-top: 20px;
+}
+.dark .comingSoon { color: #2c3e50; border-color: #1a2a3a; }
+
+@media (max-width: 768px) {
+    .statsGrid { grid-template-columns: repeat(2, 1fr); }
+    .tableHeader, .tableRow { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 480px) {
+    .statsGrid { grid-template-columns: 1fr; }
+}

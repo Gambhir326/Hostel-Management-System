@@ -1,69 +1,181 @@
-.container{
-    display:flex;
+/* =========================================================
+   Hero.module.css
+   Styles for the Login form card (Hero component).
+   This is the main login UI that sits in the center of
+   the login page. It wraps: heading, form inputs, buttons.
+   ========================================================= */
+
+/* ---- FULL PAGE CENTERING WRAPPER -------------------------
+   Wraps the card and centers it on screen.
+------------------------------------------------------------ */
+.pageWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* ---- LOGIN CARD ------------------------------------------
+   position: relative is REQUIRED so the absolute toggle
+   button is anchored inside this card.
+------------------------------------------------------------ */
+.container {
+    display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
 
-    /* height:100vh; */
-    top:50%;
-    left:50%;
-    transform: translate(-50%,-50%);
-    position: absolute;
+    /* Light mode: warm beige card */
+    background-color: #fdf6ec;
+    border-radius: 16px;
+    padding: 48px 50px 36px;
+    box-shadow: 0 8px 32px rgba(180, 130, 70, 0.15);
+    min-width: 360px;
 
+    /* Smooth transition when switching between light & dark */
+    transition: background-color 0.4s ease, box-shadow 0.4s ease, color 0.4s ease;
 }
 
-.formContainer{
+/* ---- DARK MODE OVERRIDES --------------------------------
+   Applied when parent div has class `dark`.
+   Navy blue tone for a modern night-mode look.
+------------------------------------------------------------ */
+.dark {
+    background-color: #0d1b2a;
+    box-shadow: 0 8px 32px rgba(0, 80, 160, 0.3);
+    color: #cfe2f3;
+}
+
+/* ---- THEME TOGGLE BUTTON --------------------------------
+   Small floating button at the top-right of the card.
+   Shows sun ☀ or moon 🌙 icon.
+------------------------------------------------------------ */
+.themeToggle {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(255,255,255,0.6);
+    border: 1px solid rgba(180,130,70,0.3);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, background 0.3s ease;
+    z-index: 10;
+}
+
+.themeToggle:hover {
+    transform: scale(1.15) rotate(20deg);
+    background: rgba(255,255,255,0.9);
+}
+
+.dark .themeToggle {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(100,160,210,0.4);
+}
+
+/* ---- HEADING --------------------------------------------
+   "let's log you in!" heading above the form.
+------------------------------------------------------------ */
+.container h2 {
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #7a4a1e;
+    transition: color 0.4s ease;
+}
+
+.dark h2 {
+    color: #90bfdf;
+}
+
+/* ---- FORM CONTAINER -------------------------------------
+   Stacks the email input, password input, and login button
+   vertically and centers them.
+------------------------------------------------------------ */
+.formContainer {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 100%;
 }
 
-.formContainer>input{
-    margin: 10px;
-    padding:10px;
-    width:100%;
-    border-radius:10px;
-    border: 2px solid red;
+/* ---- FORM INPUTS ----------------------------------------
+   Styling for email and password text boxes.
+   Border color changes with theme.
+------------------------------------------------------------ */
+.formContainer > input {
+    margin: 8px 0;
+    padding: 12px 14px;
+    width: 100%;
+    border-radius: 10px;
+    border: 2px solid #d4956a;
+    background-color: #fffaf4;
+    color: #3d1f00;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease, background-color 0.4s ease, color 0.4s ease;
 }
 
-.formContainer>input::placeholder{
-    /* font-size: 20px; */
+.formContainer > input::placeholder {
     font-weight: 500;
-    /* color: black; */
+    color: #b08060;
 }
 
-.formDiv{
-    padding:20px;
-    background-color: azure;
-    border:2px solid lightgray;
+.formContainer > input:focus {
+    border-color: #b05e1a;
+    box-shadow: 0 0 0 3px rgba(176, 94, 26, 0.15);
 }
 
-/* .formContainer>button{
-    margin-top:20px;
-    padding:10px;
-    border-radius: 8px;
-    background-color: black;
-    color:white;
-    transition:0.5s;
+/* Dark mode: inputs */
+.dark .formContainer > input {
+    background-color: #142233;
+    border-color: #2c5f8a;
+    color: #cfe2f3;
 }
 
-.formContainer>button:hover{
-    background-color: white;
-    color:black;
-    border: 2px solid black;
-    cursor: pointer;
+.dark .formContainer > input::placeholder {
+    color: #6a9abf;
+}
+
+.dark .formContainer > input:focus {
+    border-color: #4a9ed6;
+    box-shadow: 0 0 0 3px rgba(74, 158, 214, 0.2);
+}
+
+/* ---- SIGN UP LINK TEXT ---------------------------------
+   Coloured "sign up" hyperlink below the form.
+------------------------------------------------------------ */
+.signUpText {
+    color: #b05e1a;
     text-decoration: underline;
-    width:5%;
-} */
-
-.signUpText{
-    color:blue;
-    text-decoration: underline;
+    transition: color 0.3s ease;
 }
 
-.signUpText:hover{
+.signUpText:hover {
     cursor: pointer;
+    color: #7a3e0e;
+}
+
+.dark .signUpText {
+    color: #4a9ed6;
+}
+
+/* ---- BOTTOM TEXT (don't have an account?) ---------------
+   The small h5 below the form.
+------------------------------------------------------------ */
+.container h5 {
+    color: #7a4a1e;
+    margin-top: 16px;
+    transition: color 0.4s ease;
+}
+
+.dark h5 {
+    color: #8ab8d8;
 }

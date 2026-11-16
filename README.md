@@ -1,82 +1,73 @@
-## Hostel Management System
+# Hostel Management System (HMS)
 
-This is a full stack MERN project that involves a **client (Student)** and an **admin (Hostel Warden)** that can interact with each other. The student can address their issues that they face in their hostel and the warden can address those issues accordingly.
+A modern, full-stack Hostel Management System built with **Next.js**, **React**, **MongoDB**, **Mongoose**, and **NextAuth**.
 
-![Main Screen](https://i.postimg.cc/8P028NJv/image.png)
+---
 
-## Tech Stack
- - **Frontend:** NextJS, ReactJS, Material UI
- - **Backend:** Node JS, Express JS, Mongoose
- - **Database:** MongoDB
- - **Authentication:** Next-Auth
- - **Deployment:** Vercel. Click [here](https://hostel-management-system-mu.vercel.app/) to visit.
+## 🌟 Key Features & Role Architecture
 
-## Repository Structure
+The system features a **4-tier role-based access control (RBAC)** architecture:
 
-The entire project has been divided into three repositories:
-- **Client(Student):** (This repository)
-- **Admin(Hostel Warden):** [Hostel Management System - Admin](https://github.com/mayankjain25/Hostel-Management-System-Admin)
-- **Backend:** [Hostel Management System - Backend](https://github.com/mayankjain25/Hostel-Management-System-Backend)
+| Role | Portal / Dashboard | Permissions & Powers |
+|---|---|---|
+| 👑 **Master Admin** | `/MasterDashboard` | Root authority: Create & delete Warden accounts, view system-wide metrics and accounts |
+| 🔑 **Warden** | `/WardenDashboard` | Block management: Resolve hostel complaints, approve/reject student leave requests, monitor student roster |
+| 🎓 **Student** | `/StudentDashboard` | Self-service: View room & profile details, lodge complaints (`/CreateIssue`), request leaves |
+| 👨‍👩‍👧 **Parent** | `/ParentDashboard` | Guardian portal: Monitor linked child's hostel profile, room details, and complaint resolution progress |
 
-You can click any particular repository to navigate and browse the code for that particular repository.
+---
 
+## 🛡️ Security & Hardening Features
 
-## Features
+- **bcrypt Password Hashing:** All credentials salted and encrypted (12 rounds) — never stored in plain text.
+- **Login Firewall & Brute-force Protection:** Automatic 24-hour account lockout after 5 consecutive failed login attempts.
+- **NoSQL Injection Guard:** Recursive query sanitization stripping dangerous MongoDB operators (`$gt`, `$ne`, etc.).
+- **Sparse Indexing:** Non-student accounts (Parents, Wardens, Admins) coexist seamlessly without roll number collision.
+- **Dynamic Device Tokens:** Per-device persistent login framework.
 
-- **Student Management**: Keep track of hostel residents, their personal information, and room allocation details.
-- **Staff Management**: Keep records of hostel staff and their duties.
-- **Complaints and Feedback**: Allow students to submit complaints and feedback.
-- **Authentication and Authorization**: Secure access to different endpoints using authentication and authorization mechanisms.
+---
 
-## Deployment
+## 🎨 UI & UX Highlights
 
-- **Frontend:** https://hostel-management-system-mu.vercel.app/
-- **Backend:** https://hms-backend-89o3.onrender.com/
-- **Admin:** https://hostel-management-system-admin.vercel.app/
+- **Adaptive Navigation:** Fully responsive Navbar with mobile hamburger drawer and live role badges.
+- **Theme Engine:** Instant Dark / Light mode switching with high-contrast text rendering and `localStorage` persistence.
 
-## Running on Local Machine
+---
 
-If you want to run this project on your local machine, please note the following:
+## 🚀 Getting Started
 
-### Prerequisites
- - Node JS (12.x and above)
- - A Mongo DB Database along with `MONGO_URI`
-  
-### Clone the repository
+### 1. Prerequisites
+- **Node.js** (v18 or higher recommended)
+- **MongoDB Atlas** cluster or local MongoDB instance
 
+### 2. Installation
 ```bash
-git clone https://github.com/mayankjain25/Hostel-Management-System
+# Clone the repository
+git clone <your-repo-url>
 cd Hostel-Management-System
-```
 
-### Install Dependencies
-```bash
+# Install dependencies
 npm install
 ```
 
-### Edit `.env` file
-With the Mongo DB cluster you just created, connect to it, and copy the MONGO_URI. It usually begins with `mongodb+srv://`
-```bash
-touch .env
+### 3. Environment Configuration
+Create a `.env` file in the project root (refer to `.env.example`):
+```env
+MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.mongodb.net/hostel_db
+NEXTAUTH_SECRET=your_nextauth_secret_key_here
+NEXTAUTH_URL=http://localhost:3000
 ```
-Inside the `.env` file, copy this statement:
-```MONGODB_URI:<your MONGODB URI here>``` 
 
-### Start the dev environment
+### 4. Create Initial Root (Master Admin)
+To bootstrap your first root administrator, configure and run the one-time setup script:
+```bash
+node scripts/createMasterAdmin.js
+```
+*(Once created, you can safely remove `scripts/createMasterAdmin.js` or keep it ignored via `.gitignore`.)*
+
+### 5. Run Development Server
 ```bash
 npm run dev
 ```
 
-Wait for a few seconds for the program to compile. Once done, open **http://localhost:3000/** on your machine to browse the website.
-
-## Contributing
-Contributions are welcome! If you find any bugs or want to add new features, please open an issue or submit a pull request. Make sure to follow the project's coding style and guidelines.
-
-## License
-This project is licensed under the MIT License.
-
-## Contributors
-This project has been developed by [Mayank Jain](https://mayankjain25.netlify.app)
-Feel free to contact me at jainmayank2509@gmail.com
-
-May the force be with you!
+Visit [http://localhost:3000](http://localhost:3000) in your browser.

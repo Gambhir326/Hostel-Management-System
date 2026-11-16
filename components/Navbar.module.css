@@ -1,9 +1,242 @@
-.container{
+/* =========================================================
+   Navbar.module.css — Responsive Navigation Bar
+   Breakpoints:
+     Desktop  > 768px : full row
+     Tablet 480-768px : compact (hide date + email)
+     Mobile  < 480px  : logo + hamburger only
+   ========================================================= */
+
+/* ---- BASE NAVBAR --------------------------------------- */
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    background: #ffffff;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.08);
+    transition: background 0.4s ease, box-shadow 0.4s ease;
+}
+
+.dark {
+    background: #0d1b2a;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- MAIN ROW ----------------------------------------- */
+.row {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    padding: 0 1rem;
-    height: 4rem;
-    background-color: #fff;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    justify-content: space-between;
+    padding: 0 1.5rem;
+    height: 3.75rem;
+    gap: 12px;
+}
+
+/* ---- BRAND -------------------------------------------- */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.brandBold {
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #2d1a00;
+    transition: color 0.4s ease;
+}
+
+.dark .brandBold { color: #cfe2f3; }
+
+.brandLight {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #6b4c2a;
+    transition: color 0.4s ease;
+}
+
+.dark .brandLight { color: #7a9ec0; }
+
+/* ---- CENTER: DATE -------------------------------------- */
+.date {
+    font-size: 0.82rem;
+    color: #9a7a5a;
+    flex: 1;
+    text-align: center;
+    transition: color 0.4s ease;
+}
+
+.dark .date { color: #5a7a9a; }
+
+/* ---- RIGHT CONTROLS ------------------------------------ */
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+/* ---- EMAIL -------------------------------------------- */
+.email {
+    font-size: 0.82rem;
+    color: #6b4c2a;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    transition: color 0.4s ease;
+}
+
+.dark .email { color: #7ab0d4; }
+
+/* ---- ROLE BADGE --------------------------------------- */
+.roleBadge {
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.roleStudent  { background: #e8f5e9; color: #2e7d32; }
+.roleParent   { background: #e3f2fd; color: #1565c0; }
+.roleWarden   { background: #fff3e0; color: #e65100; }
+.roleMaster   { background: #fce4ec; color: #880e4f; }
+
+/* Dark mode badge adjustments */
+.dark .roleStudent  { background: #1b3a1f; color: #81c784; }
+.dark .roleParent   { background: #0d2a4a; color: #64b5f6; }
+.dark .roleWarden   { background: #3a2000; color: #ffb74d; }
+.dark .roleMaster   { background: #3a001a; color: #f48fb1; }
+
+/* ---- ICON BUTTONS (theme toggle + hamburger) ---------- */
+.iconBtn {
+    background: rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.25s ease, background 0.25s ease;
+    flex-shrink: 0;
+}
+
+.iconBtn:hover {
+    transform: scale(1.12);
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.dark .iconBtn {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.12);
+}
+
+.dark .iconBtn:hover { background: rgba(255, 255, 255, 0.14); }
+
+/* ---- LOGOUT BUTTON (desktop) -------------------------- */
+.logoutBtn {
+    background: transparent;
+    border: 1.5px solid #d32f2f;
+    color: #d32f2f;
+    border-radius: 8px;
+    padding: 5px 14px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.logoutBtn:hover {
+    background: #d32f2f;
+    color: #fff;
+}
+
+/* ---- HAMBURGER: only shown on tablet/mobile ----------- */
+.hamburger { display: none; }
+
+/* ---- MOBILE DRAWER ------------------------------------ */
+.drawer {
+    padding: 12px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background: #fff;
+    border-top: 1px solid rgba(0,0,0,0.08);
+    animation: slideDown 0.2s ease;
+}
+
+.drawerDark {
+    background: #0d1b2a;
+    border-top-color: rgba(255,255,255,0.08);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.drawerEmail {
+    font-size: 0.85rem;
+    color: #6b4c2a;
+    padding: 4px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.drawerDark .drawerEmail { color: #7ab0d4; border-bottom-color: rgba(255,255,255,0.08); }
+
+.drawerBadge { align-self: flex-start; }
+
+.drawerLink {
+    font-size: 0.95rem;
+    color: #2d1a00;
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    transition: color 0.2s ease;
+}
+
+.drawerDark .drawerLink { color: #cfe2f3; border-bottom-color: rgba(255,255,255,0.06); }
+.drawerLink:hover { color: #b05e1a; }
+.drawerDark .drawerLink:hover { color: #4a9ed6; }
+
+.drawerLogout {
+    background: transparent;
+    border: 1.5px solid #d32f2f;
+    color: #d32f2f;
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: left;
+    margin-top: 4px;
+}
+
+.drawerLogout:hover { background: #d32f2f; color: #fff; }
+
+/* ======================================================
+   RESPONSIVE BREAKPOINTS
+   ====================================================== */
+
+/* ---- TABLET: 480px – 768px --------------------------- */
+@media (max-width: 768px) {
+    .hamburger { display: flex; }
+    .date { display: none; }
+    .email { display: none; }
+    .roleBadge { display: none; }
+    .desktopOnly { display: none; }
+}
+
+/* ---- MOBILE: < 480px --------------------------------- */
+@media (max-width: 480px) {
+    .row { padding: 0 1rem; }
+    .brandLight { display: none; }
 }

@@ -1,9 +1,12 @@
-.mainContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* height:100vh; */
-    flex-direction: column;
+.mainContainer {
+  min-height: calc(100vh - 120px); /* ensures full screen height minus navbar/footer */
+  overflow-y: auto;                /* enables vertical scrolling */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 2rem;
+  padding-bottom: 4rem;           /* prevents form/button from touching or overlapping the footer */
 }
 
 .mainText{
